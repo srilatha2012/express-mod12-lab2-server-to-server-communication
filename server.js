@@ -27,7 +27,7 @@ app.get("/api/fun-fact", async (req, res) => {
         const response = await axios.get("https://uselessfacts.jsph.pl/api/v2/facts/random");
        
         //3. the data is already parsed and available in response.data
-        res.json(response.data);
+         res.json({fact: response.data.text});
     } catch (error) { 
         //4. this single catch handles everything
         //- network errors
