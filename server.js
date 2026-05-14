@@ -9,8 +9,10 @@ const axios = require("axios");
 //create an Express application object
 const app = express();
 
+require("dotenv").config();
+
 //define the port number
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 //MIDDLEWARE
 //ROUTES
@@ -25,21 +27,21 @@ app.get("/api/fun-fact", async (req, res) => {
     try {
         //2. await the axios GET request
         const response = await axios.get("https://uselessfacts.jsph.pl/api/v2/facts/random");
-       
+
         //3. the data is already parsed and available in response.data
-         res.json({fact: response.data.text});
-    } catch (error) { 
+        res.json({ fact: response.data.text });
+    } catch (error) {
         //4. this single catch handles everything
         //- network errors
         //- http status errors
-        if(error.response) {
+        if (error.response) {
             //The request was made and the server responded with a status code
             console.error('API Error:', error.response.status, error.response.data)
-            res.status(error.response.status).json({message :'Error fetching the data from external API.'});
+            res.status(error.response.status).json({ message: 'Error fetching the data from external API.' });
         } else {
             //Something happned in setting up the request that triggered an error
             console.error('Network Error:', error.message);
-            res.status(500).json({message: 'A network error occured.'});
+            res.status(500).json({ message: 'A network error occured.' });
         }
     }
 
