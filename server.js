@@ -16,6 +16,11 @@ app.get("/test", (req,res) =>{
     res.send("testing..");
 });
 
+//API route
+app.get("/api/fun-fact", async(req,res) =>{
+    console.log('fetching the data and sending it to the client');
+})
+
 //PORT
 app.listen(PORT, ()=>{
     console.log(`Server is listening on PORT ${PORT}`)
